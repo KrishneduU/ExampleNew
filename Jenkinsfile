@@ -16,8 +16,6 @@ pipeline {
         
         stage('Build') {
             steps {
-               
-                bat 'php artisan key:generate'
                 bat 'php artisan migrate'
             }
         }
