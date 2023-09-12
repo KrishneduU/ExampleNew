@@ -16,7 +16,15 @@ pipeline {
         
         stage('Build') {
             steps {
-                bat 'php artisan build'  // Use 'bat' for Windows batch commands
+                // bat 'php artisan build'  // Use 'bat' for Windows batch commands
+                bat 'php artisan key:generate'
+                bat 'php artisan migrate'
+            }
+        }
+        stage('Test') {
+            steps {
+               // bat 'php artisan test'
+                bat './vendor/bin/phpunit'
             }
         }
     }
