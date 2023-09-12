@@ -21,8 +21,8 @@ pipeline {
         }
         stage('Test') {
             steps {
-               bat 'php artisan test'
-                // bat './vendor/bin/phpunit'
+               // bat 'php artisan test'
+                bat './vendor/bin/phpunit'
             }
         }
     }
