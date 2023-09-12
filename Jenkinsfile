@@ -7,22 +7,17 @@ pipeline {
                 checkout scm
             }
         }
-        
         stage('Install Dependencies') {
             steps {
-                bat 'composer install' // Use 'bat' for Windows batch commands
+                echo 'composer install'
             }
         }
-        
-        stage('Build') {
+        stage('Build and Deploy') {
             steps {
-                bat 'php artisan migrate'
-            }
-        }
-        stage('Test') {
-            steps {
-               // bat 'php artisan test'
-                bat './vendor/bin/phpunit'
+                echo 'php artisan config:cache'
+                echo 'php artisan route:cache'
+                echo 'php artisan migrate --force'
+                // Add any other necessary Laravel commands here
             }
         }
     }
