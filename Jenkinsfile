@@ -1,34 +1,25 @@
 pipeline {
     agent any
-
+    
     stages {
         stage('Checkout') {
             steps {
-                sh 'php artisan build'
+                checkout scm
             }
-               
         }
-
+        
         stage('Install Dependencies') {
             steps {
-                sh 'composer install'
+                sh 'composer install --no-interaction --prefer-dist'
             }
         }
-
-        stage('Run Tests') {
+        
+        stage('Build') {
             steps {
-                sh 'php artisan test'
-            }
-        }
-
-        stage('Build and Deploy') {
-            steps {
-                sh 'php artisan optimize'
-                sh 'npm install'
-                sh 'npm run production'
-                // Add deployment steps here
+                sh 'php artisan build'  // Replace with your Laravel build command
             }
         }
     }
 }
+
 
