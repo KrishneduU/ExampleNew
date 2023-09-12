@@ -10,13 +10,13 @@ pipeline {
         
         stage('Install Dependencies') {
             steps {
-                sh 'composer install'
+                bat 'composer install' // Use 'bat' for Windows batch commands
             }
         }
         
         stage('Build') {
             steps {
-                sh 'php artisan build'  // Replace with your Laravel build command
+                bat 'php artisan build'  // Use 'bat' for Windows batch commands
             }
         }
     }
