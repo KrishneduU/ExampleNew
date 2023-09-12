@@ -20,6 +20,13 @@ pipeline {
                 // Add any other necessary Laravel commands here
             }
         }
+         stage('Run') {
+            steps {
+                echo 'php artisan serve'
+                
+            }
+        }
+        
     }
 }
 
