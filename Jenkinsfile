@@ -33,12 +33,19 @@ pipeline {
             }
         }
 
-       stage('Deploy to Tomcat') {
+      stage('Copy Folder to Tomcat Server') {
     steps {
-        // Deploy the WAR file to Tomcat using the credentials you created
-        deploy adapters: [tomcat(credentialsId: 'krish/******', url: 'http://tomcat-server:8082/manager/text', path: 'ExJenkins')], contextPath: 'my-app'
+        script {
+            def tomcatServer = 'http://localhost:8082' // Replace with your Tomcat server's hostname or IP
+            def tomcatUser = 'krish' // Replace with your Tomcat server's username
+            def tomcatDestination = 'Apache Software Foundation\Tomcat 9.0\webapps' // Replace with the destination path on the Tomcat server
+
+            // Use the 'sh' step to execute the 'scp' command
+            sh "scp -r ExJenkins ${tomcatUser}@${tomcatServer}:${tomcatDestination}"
+        }
     }
 }
+
 
 
         
