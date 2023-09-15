@@ -38,7 +38,7 @@ pipeline {
         script {
             def tomcatServer = 'http://localhost:8082' // Replace with your Tomcat server's hostname or IP
             def tomcatUser = 'krish' // Replace with your Tomcat server's username
-            def tomcatDestination = 'C:/Program Files/Apache Software Foundation/Tomcat 9.0/webapps' // Replace with the destination path on the Tomcat server
+            def tomcatDestination = 'C:\Program Files\Apache Software Foundation\Tomcat 9.0\bin' // Replace with the destination path on the Tomcat server
 
             // Use the 'sh' step to execute the 'scp' command
             bat "scp -r ExJenkins ${tomcatUser}@${tomcatServer}:${tomcatDestination}"
