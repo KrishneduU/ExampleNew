@@ -47,18 +47,20 @@ pipeline {
         //     }
         // }
         
-        stage('Copy Workspace to Tomcat') {
+       stage('Copy Workspace to Tomcat') {
             steps {
-                // Define the paths
-                def workspacePath = 'C:\\ProgramData\\Jenkins\\.jenkins\\workspace\\ExJenkins'
-                def tomcatWebappsPath = 'C:\\Program Files\\Apache Software Foundation\\Tomcat 9.0\\webapps'
+                script {
+                    // Define the paths
+                    def workspacePath = 'C:\\ProgramData\\Jenkins\\.jenkins\\workspace\\ExJenkins'
+                    def tomcatWebappsPath = 'C:\\Program Files\\Apache Software Foundation\\Tomcat 9.0\\webapps'
 
-                // Copy the workspace folder to Tomcat webapps
-                bat(script: "xcopy /E /I /Y \"${workspacePath}\" \"${tomcatWebappsPath}\\ExJenkins\"", label: 'Copy Workspace')
+                    // Copy the workspace folder to Tomcat webapps
+                    bat(script: "xcopy /E /I /Y \"${workspacePath}\" \"${tomcatWebappsPath}\\ExJenkins\"", label: 'Copy Workspace')
 
-                // Optionally, restart Tomcat
-                bat(script: "net stop Tomcat9", label: 'Stop Tomcat')
-                bat(script: "net start Tomcat9", label: 'Start Tomcat')
+                    // Optionally, restart Tomcat
+                    bat(script: "net stop Tomcat9", label: 'Stop Tomcat')
+                    bat(script: "net start Tomcat9", label: 'Start Tomcat')
+                }
             }
         }
     
