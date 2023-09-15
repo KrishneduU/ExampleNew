@@ -52,7 +52,7 @@ pipeline {
                 script {
                     // Define the paths
                     def workspacePath = 'C:\\ProgramData\\Jenkins\\.jenkins\\workspace\\ExJenkins'
-                    def tomcatWebappsPath = 'C:\\Program Files\\Apache Software Foundation\\Tomcat 9.0\\webapps'
+                    def tomcatWebappsPath = 'C:\\Program Files\\Apache Software Foundation\\Tomcat 9.0\\bin'
 
                     // Copy the workspace folder to Tomcat webapps
                     bat(script: "xcopy /E /I /Y \"${workspacePath}\" \"${tomcatWebappsPath}\\ExJenkins\"", label: 'Copy Workspace')
