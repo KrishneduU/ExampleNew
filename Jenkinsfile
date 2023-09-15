@@ -43,7 +43,8 @@ pipeline {
 
 
             // Use the 'sh' step to execute the 'scp' command
-            bat "scp -r ExJenkins ${tomcatUser}@${tomcatServer}:${tomcatDestination}"
+            // bat "scp -r ExJenkins ${tomcatUser}@${tomcatServer}:${tomcatDestination}"
+            deploy adapters: [tomcat9(credentialsId: 'c937a1d3-d871-4244-979b-c670d1b67e28', path: '', url: 'http://localhost:8082/')], contextPath: 'ExJenkins'
         }
     }
 }
