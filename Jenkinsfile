@@ -36,7 +36,7 @@ pipeline {
        stage('Deploy to Tomcat') {
     steps {
         // Deploy the WAR file to Tomcat using the credentials you created
-        deploy adapters: [tomcat(credentialsId: 'krish/******', url: 'http://tomcat-server:8082/manager/text', path: 'C:\ProgramData\Jenkins\.jenkins\workspace\ExJenkins')], contextPath: 'my-app'
+        deploy adapters: [tomcat(credentialsId: 'krish/******', url: 'http://tomcat-server:8082/manager/text', path: 'ExJenkins')], contextPath: 'my-app'
     }
 }
 
