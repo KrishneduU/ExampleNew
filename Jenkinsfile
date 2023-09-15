@@ -36,7 +36,7 @@ pipeline {
         stage('Deploy to Tomcat') {
             steps {
                 // ech"Deploy the WAR file to Tomcat (using the Deploy to Container Plugin)"
-                deploy adapters: [tomcat(credentialsId: 'krish/******', url: 'http://tomcat-server:8082/manager/text', path: '/your-app', war: '**/your-app.war')], contextPath: 'my-app'
+                deploy adapters: [tomcat(credentialsId: 'krish/******', url: 'http://tomcat-server:8082/manager/text', path: '/your-app', war: '**/*.war')], contextPath: 'my-app'
             }
         }
         
