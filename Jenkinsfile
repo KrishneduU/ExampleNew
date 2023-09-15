@@ -33,12 +33,19 @@ pipeline {
             }
         }
 
-        stage('Deploy to Tomcat') {
-            steps {
-                // ech"Deploy the WAR file to Tomcat (using the Deploy to Container Plugin)"
-                deploy adapters: [tomcat(credentialsId: 'krish/******', url: 'http://tomcat-server:8082/manager/text', path: '/your-app', war: '**/*.war')], contextPath: 'my-app'
+       stage('Deploy to Tomcat') {
+      steps {
+        script {
+            def warFile = findFiles(glob: '**/*.war')[0] // This assumes the WAR file is in the workspace
+            if (warFile == null) {
+                error('No WAR file found in the workspace.')
+            } else {
+                deploy adapters: [tomcat(credentialsId: 'krish/******', url: 'http://tomcat-server:8082/manager/text', path: 'my-app', war: warFile.path)], contextPath: 'my-app'
             }
         }
+    }
+}
+
         
     }
 }
