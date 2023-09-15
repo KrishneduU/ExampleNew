@@ -33,20 +33,35 @@ pipeline {
             }
         }
 
-        stage('Copy Folder to Tomcat Server') {
-            steps {
-                script {
-                    def tomcatServer = 'http://localhost:8082' // Replace with your Tomcat server's hostname or IP
-                    def tomcatUser = 'krish' // Replace with your Tomcat server's username
-                    def tomcatDestination = 'C:/Program Files/Apache Software Foundation/Tomcat 9.0/webapps/'
+        // stage('Copy Folder to Tomcat Server') {
+        //     steps {
+        //         script {
+        //             def tomcatServer = 'http://localhost:8082' // Replace with your Tomcat server's hostname or IP
+        //             def tomcatUser = 'krish' // Replace with your Tomcat server's username
+        //             def tomcatDestination = 'C:/Program Files/Apache Software Foundation/Tomcat 9.0/webapps/'
         
-                    // Use the 'sh' step to execute the 'scp' command
-                    bat "scp -r ExJenkins ${tomcatUser}@${tomcatServer}:${tomcatDestination}"
-                    // deploy adapters: [tomcat9(credentialsId: 'c937a1d3-d871-4244-979b-c670d1b67e28', path: '', url: 'http://localhost:8082/')], contextPath: 'ExJenkins'
-                }
+        //             // Use the 'sh' step to execute the 'scp' command
+        //             bat "scp -r ExJenkins ${tomcatUser}@${tomcatServer}:${tomcatDestination}"
+        //             // deploy adapters: [tomcat9(credentialsId: 'c937a1d3-d871-4244-979b-c670d1b67e28', path: '', url: 'http://localhost:8082/')], contextPath: 'ExJenkins'
+        //         }
+        //     }
+        // }
+         stages {
+        stage('Copy Workspace to Tomcat') {
+            steps {
+                // Define the paths
+                def workspacePath = 'C:\\ProgramData\\Jenkins\\.jenkins\\workspace\\ExJenkins'
+                def tomcatWebappsPath = 'C:\\Program Files\\Apache Software Foundation\\Tomcat 9.0\\webapps'
+
+                // Copy the workspace folder to Tomcat webapps
+                bat(script: "xcopy /E /I /Y \"${workspacePath}\" \"${tomcatWebappsPath}\\ExJenkins\"", label: 'Copy Workspace')
+
+                // Optionally, restart Tomcat
+                bat(script: "net stop Tomcat9", label: 'Stop Tomcat')
+                bat(script: "net start Tomcat9", label: 'Start Tomcat')
             }
         }
-
+    }
 
 
         
