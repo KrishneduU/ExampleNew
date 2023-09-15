@@ -41,7 +41,7 @@ pipeline {
             def tomcatDestination = 'Tomcat 9.0\\webapps' // Replace with the destination path on the Tomcat server
 
             // Use the 'sh' step to execute the 'scp' command
-            sh "scp -r ExJenkins ${tomcatUser}@${tomcatServer}:${tomcatDestination}"
+            bat "scp -r ExJenkins ${tomcatUser}@${tomcatServer}:${tomcatDestination}"
         }
     }
 }
