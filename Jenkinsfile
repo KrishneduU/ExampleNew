@@ -46,7 +46,7 @@ pipeline {
         //         }
         //     }
         // }
-         stages {
+        
         stage('Copy Workspace to Tomcat') {
             steps {
                 // Define the paths
@@ -61,7 +61,7 @@ pipeline {
                 bat(script: "net start Tomcat9", label: 'Start Tomcat')
             }
         }
-    }
+    
 
 
         
